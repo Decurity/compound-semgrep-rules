@@ -1,6 +1,6 @@
 rules:
   - id: lack-of-indexed-parameter
-    message: Semgrep found a match
+    message: Event parameters with type 'address' should be indexed
     languages:
       - solidity
     severity: WARNING
