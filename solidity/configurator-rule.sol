@@ -79,8 +79,8 @@ contract Configurator is ConfiguratorStorage {
         factory[cometProxy] = newFactory;
     }
 
-    //Should it be ok?
-    //ruleid: configurator-rule
+    //Should it be catched?
+    //ok: configurator-rule
     function setFactoryNoEventEmitAndAccessControl(address cometProxy, address newFactory) external {
         address oldFactory = factory[cometProxy];
         factory[cometProxy] = newFactory;

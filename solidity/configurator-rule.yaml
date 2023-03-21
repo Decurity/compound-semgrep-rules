@@ -15,31 +15,31 @@ rules:
       # semgrep can't parse properly ellipsis operator in "emit $EVENT(...);"
       - pattern-not: |
           function $FUNC(...) {
-            if (msg.sender != $ADMIN) revert $ERROR();
+            if (msg.sender != $ADMIN) revert $ERROR(...);
             ...
             emit $EVENT($ARG1);
           }
       - pattern-not: |
           function $FUNC(...) {
-            if (msg.sender != $ADMIN) revert $ERROR();
+            if (msg.sender != $ADMIN) revert $ERROR(...);
             ...
             emit $EVENT($ARG1, $ARG2);
           }
       - pattern-not: |
           function $FUNC(...) {
-            if (msg.sender != $ADMIN) revert $ERROR();
+            if (msg.sender != $ADMIN) revert $ERROR(...);
             ...
             emit $EVENT($ARG1, $ARG2, $ARG3);
           }
       - pattern-not: |
           function $FUNC(...) {
-            if (msg.sender != $ADMIN) revert $ERROR();
+            if (msg.sender != $ADMIN) revert $ERROR(...);
             ...
             emit $EVENT($ARG1, $ARG2, $ARG3, $ARG4);
           }
       - pattern-not: |
           function $FUNC(...) {
-            if (msg.sender != $ADMIN) revert $ERROR();
+            if (msg.sender != $ADMIN) revert $ERROR(...);
             ...
             emit $EVENT($ARG1, $ARG2, $ARG3, $ARG4, $ARG5);
           }
@@ -51,7 +51,7 @@ rules:
       - pattern-either:
           - pattern: |
               function $FUNC(...) {
-                  if (msg.sender != $ADMIN) revert $ERROR();
+                  if (msg.sender != $ADMIN) revert $ERROR(...);
                   ...
                 }
           - pattern: |
