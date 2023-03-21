@@ -1,0 +1,81 @@
+rules:
+  - id: configurator-rule
+    message: Function does not follow the standart structure of admin function.
+    languages:
+      - solidity
+    severity: WARNING
+    metadata:
+      tags:
+        - compound
+    patterns:
+      - metavariable-regex:
+          metavariable: $FUNC
+          regex: ^(set|update|add)\w*$
+
+      # semgrep can't parse properly ellipsis operator in "emit $EVENT(...);"
+      - pattern-not: |
+          function $FUNC(...) {
+            if (msg.sender != $ADMIN) revert $ERROR();
+            ...
+            emit $EVENT($ARG1);
+          }
+      - pattern-not: |
+          function $FUNC(...) {
+            if (msg.sender != $ADMIN) revert $ERROR();
+            ...
+            emit $EVENT($ARG1, $ARG2);
+          }
+      - pattern-not: |
+          function $FUNC(...) {
+            if (msg.sender != $ADMIN) revert $ERROR();
+            ...
+            emit $EVENT($ARG1, $ARG2, $ARG3);
+          }
+      - pattern-not: |
+          function $FUNC(...) {
+            if (msg.sender != $ADMIN) revert $ERROR();
+            ...
+            emit $EVENT($ARG1, $ARG2, $ARG3, $ARG4);
+          }
+      - pattern-not: |
+          function $FUNC(...) {
+            if (msg.sender != $ADMIN) revert $ERROR();
+            ...
+            emit $EVENT($ARG1, $ARG2, $ARG3, $ARG4, $ARG5);
+          }
+      - pattern-not: |
+          function $FUNC(...) {
+            require(<... msg.sender ...>, ...);
+            ...
+          }
+      - pattern-either:
+          - pattern: |
+              function $FUNC(...) {
+                  if (msg.sender != $ADMIN) revert $ERROR();
+                  ...
+                }
+          - pattern: |
+              function $FUNC(...) {
+                  ...
+                  emit $EVENT($ARG1);
+                }
+          - pattern: |
+              function $FUNC(...) {
+                  ...
+                  emit $EVENT($ARG1, $ARG2);
+                }
+          - pattern: |
+              function $FUNC(...) {
+                  ...
+                  emit $EVENT($ARG1, $ARG2, $ARG3);
+                }
+          - pattern: |
+              function $FUNC(...) {
+                  ...
+                  emit $EVENT($ARG1, $ARG2, $ARG3, $ARG4);
+                }
+          - pattern: |
+              function $FUNC(...) {
+                  ...
+                  emit $EVENT($ARG1, $ARG2, $ARG3, $ARG4, $ARG5);
+                }
