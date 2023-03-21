@@ -53,7 +53,7 @@ contract Configurator is ConfiguratorStorage {
         version = 1;
     }
 
-    //ok: configurator-rule
+    //ok: state-changing-func-does-not-emit-event
     function setFactory(address cometProxy, address newFactory) external {
         if (msg.sender != governor) revert Unauthorized();
 
@@ -62,7 +62,7 @@ contract Configurator is ConfiguratorStorage {
         emit SetFactory(cometProxy, oldFactory, newFactory);
     }
 
-    //ruleid: configurator-rule
+    //ok: state-changing-func-does-not-emit-event
     function setFactoryNoAccessControlTest(address cometProxy, address newFactory) external {
 
         address oldFactory = factory[cometProxy];
@@ -71,7 +71,7 @@ contract Configurator is ConfiguratorStorage {
     }
 
 
-    //ruleid: configurator-rule
+    //ruleid: state-changing-func-does-not-emit-event
     function setFactoryNoEventEmit(address cometProxy, address newFactory) external {
         if (msg.sender != governor) revert Unauthorized();
 
@@ -79,14 +79,13 @@ contract Configurator is ConfiguratorStorage {
         factory[cometProxy] = newFactory;
     }
 
-    //Should it be catched?
-    //ok: configurator-rule
+    //ruleid: state-changing-func-does-not-emit-event
     function setFactoryNoEventEmitAndAccessControl(address cometProxy, address newFactory) external {
         address oldFactory = factory[cometProxy];
         factory[cometProxy] = newFactory;
     }
 
-    //Timelock ok: configurator-rule
+    //Timelock ok: state-changing-func-does-not-emit-event
     function setPendingAdmin(address pendingAdmin_) public {
         require(msg.sender == address(this), "Timelock::setPendingAdmin: Call must come from Timelock.");
         
@@ -94,7 +93,7 @@ contract Configurator is ConfiguratorStorage {
         emit NewPendingAdmin(pendingAdmin);
     }
 
-    //ok: configurator-rule
+    //ok: state-changing-func-does-not-emit-event
     function setConfiguration(address cometProxy, Configuration calldata newConfiguration) external {
         if (msg.sender != governor) revert Unauthorized();
         Configuration memory oldConfiguration = configuratorParams[cometProxy];
@@ -107,7 +106,7 @@ contract Configurator is ConfiguratorStorage {
         emit SetConfiguration(cometProxy, oldConfiguration, newConfiguration);
     }
 
-    //ok: configurator-rule
+    //ok: state-changing-func-does-not-emit-event
     function setGovernor(address cometProxy, address newGovernor) external {
         if (msg.sender != governor) revert Unauthorized();
 
@@ -115,7 +114,7 @@ contract Configurator is ConfiguratorStorage {
         configuratorParams[cometProxy].governor = newGovernor;
         emit SetGovernor(cometProxy, oldGovernor, newGovernor);
     }
-    //ok: configurator-rule
+    //ok: state-changing-func-does-not-emit-event
     function setPauseGuardian(address cometProxy, address newPauseGuardian) external {
         if (msg.sender != governor) revert Unauthorized();
 
@@ -123,7 +122,7 @@ contract Configurator is ConfiguratorStorage {
         configuratorParams[cometProxy].pauseGuardian = newPauseGuardian;
         emit SetPauseGuardian(cometProxy, oldPauseGuardian, newPauseGuardian);
     }
-    //ok: configurator-rule
+    //ok: state-changing-func-does-not-emit-event
     function setBaseTokenPriceFeed(address cometProxy, address newBaseTokenPriceFeed) external {
         if (msg.sender != governor) revert Unauthorized();
 
@@ -131,7 +130,7 @@ contract Configurator is ConfiguratorStorage {
         configuratorParams[cometProxy].baseTokenPriceFeed = newBaseTokenPriceFeed;
         emit SetBaseTokenPriceFeed(cometProxy, oldBaseTokenPriceFeed, newBaseTokenPriceFeed);
     }
-    //ok: configurator-rule
+    //ok: state-changing-func-does-not-emit-event
     function setExtensionDelegate(address cometProxy, address newExtensionDelegate) external {
         if (msg.sender != governor) revert Unauthorized();
 
@@ -139,7 +138,7 @@ contract Configurator is ConfiguratorStorage {
         configuratorParams[cometProxy].extensionDelegate = newExtensionDelegate;
         emit SetExtensionDelegate(cometProxy, oldExtensionDelegate, newExtensionDelegate);
     }
-    //ok: configurator-rule
+    //ok: state-changing-func-does-not-emit-event
     function setSupplyKink(address cometProxy, uint64 newSupplyKink) external {
         if (msg.sender != governor) revert Unauthorized();
 
@@ -147,7 +146,7 @@ contract Configurator is ConfiguratorStorage {
         configuratorParams[cometProxy].supplyKink = newSupplyKink;
         emit SetSupplyKink(cometProxy, oldSupplyKink, newSupplyKink);
     }
-    //ok: configurator-rule
+    //ok: state-changing-func-does-not-emit-event
     function setSupplyPerYearInterestRateSlopeLow(address cometProxy, uint64 newSlope) external {
         if (msg.sender != governor) revert Unauthorized();
 
@@ -155,7 +154,7 @@ contract Configurator is ConfiguratorStorage {
         configuratorParams[cometProxy].supplyPerYearInterestRateSlopeLow = newSlope;
         emit SetSupplyPerYearInterestRateSlopeLow(cometProxy, oldSlope, newSlope);
     }
-    //ok: configurator-rule
+    //ok: state-changing-func-does-not-emit-event
     function setSupplyPerYearInterestRateSlopeHigh(address cometProxy, uint64 newSlope) external {
         if (msg.sender != governor) revert Unauthorized();
 
@@ -163,7 +162,7 @@ contract Configurator is ConfiguratorStorage {
         configuratorParams[cometProxy].supplyPerYearInterestRateSlopeHigh = newSlope;
         emit SetSupplyPerYearInterestRateSlopeHigh(cometProxy, oldSlope, newSlope);
     }
-    //ok: configurator-rule
+    //ok: state-changing-func-does-not-emit-event
     function setSupplyPerYearInterestRateBase(address cometProxy, uint64 newBase) external {
         if (msg.sender != governor) revert Unauthorized();
 
@@ -171,7 +170,7 @@ contract Configurator is ConfiguratorStorage {
         configuratorParams[cometProxy].supplyPerYearInterestRateBase = newBase;
         emit SetSupplyPerYearInterestRateBase(cometProxy, oldBase, newBase);
     }
-    //ok: configurator-rule
+    //ok: state-changing-func-does-not-emit-event
     function setBorrowKink(address cometProxy, uint64 newBorrowKink) external {
         if (msg.sender != governor) revert Unauthorized();
 
@@ -179,7 +178,7 @@ contract Configurator is ConfiguratorStorage {
         configuratorParams[cometProxy].borrowKink = newBorrowKink;
         emit SetBorrowKink(cometProxy, oldBorrowKink, newBorrowKink);
     }
-    //ok: configurator-rule
+    //ok: state-changing-func-does-not-emit-event
     function setBorrowPerYearInterestRateSlopeLow(address cometProxy, uint64 newSlope) external {
         if (msg.sender != governor) revert Unauthorized();
 
@@ -187,7 +186,7 @@ contract Configurator is ConfiguratorStorage {
         configuratorParams[cometProxy].borrowPerYearInterestRateSlopeLow = newSlope;
         emit SetBorrowPerYearInterestRateSlopeLow(cometProxy, oldSlope, newSlope);
     }
-    //ok: configurator-rule
+    //ok: state-changing-func-does-not-emit-event
     function setBorrowPerYearInterestRateSlopeHigh(address cometProxy, uint64 newSlope) external {
         if (msg.sender != governor) revert Unauthorized();
 
@@ -195,7 +194,7 @@ contract Configurator is ConfiguratorStorage {
         configuratorParams[cometProxy].borrowPerYearInterestRateSlopeHigh = newSlope;
         emit SetBorrowPerYearInterestRateSlopeHigh(cometProxy, oldSlope, newSlope);
     }
-    //ok: configurator-rule
+    //ok: state-changing-func-does-not-emit-event
     function setBorrowPerYearInterestRateBase(address cometProxy, uint64 newBase) external {
         if (msg.sender != governor) revert Unauthorized();
 
@@ -203,7 +202,7 @@ contract Configurator is ConfiguratorStorage {
         configuratorParams[cometProxy].borrowPerYearInterestRateBase = newBase;
         emit SetBorrowPerYearInterestRateBase(cometProxy, oldBase, newBase);
     }
-    //ok: configurator-rule
+    //ok: state-changing-func-does-not-emit-event
     function setStoreFrontPriceFactor(address cometProxy, uint64 newStoreFrontPriceFactor) external {
         if (msg.sender != governor) revert Unauthorized();
 
@@ -211,7 +210,7 @@ contract Configurator is ConfiguratorStorage {
         configuratorParams[cometProxy].storeFrontPriceFactor = newStoreFrontPriceFactor;
         emit SetStoreFrontPriceFactor(cometProxy, oldStoreFrontPriceFactor, newStoreFrontPriceFactor);
     }
-    //ok: configurator-rule
+    //ok: state-changing-func-does-not-emit-event
     function setBaseTrackingSupplySpeed(address cometProxy, uint64 newBaseTrackingSupplySpeed) external {
         if (msg.sender != governor) revert Unauthorized();
 
@@ -219,7 +218,7 @@ contract Configurator is ConfiguratorStorage {
         configuratorParams[cometProxy].baseTrackingSupplySpeed = newBaseTrackingSupplySpeed;
         emit SetBaseTrackingSupplySpeed(cometProxy, oldBaseTrackingSupplySpeed, newBaseTrackingSupplySpeed);
     }
-    //ok: configurator-rule
+    //ok: state-changing-func-does-not-emit-event
     function setBaseTrackingBorrowSpeed(address cometProxy, uint64 newBaseTrackingBorrowSpeed) external {
         if (msg.sender != governor) revert Unauthorized();
 
@@ -227,7 +226,7 @@ contract Configurator is ConfiguratorStorage {
         configuratorParams[cometProxy].baseTrackingBorrowSpeed = newBaseTrackingBorrowSpeed;
         emit SetBaseTrackingBorrowSpeed(cometProxy, oldBaseTrackingBorrowSpeed, newBaseTrackingBorrowSpeed);
     }
-    //ok: configurator-rule
+    //ok: state-changing-func-does-not-emit-event
     function setBaseMinForRewards(address cometProxy, uint104 newBaseMinForRewards) external {
         if (msg.sender != governor) revert Unauthorized();
 
@@ -235,7 +234,7 @@ contract Configurator is ConfiguratorStorage {
         configuratorParams[cometProxy].baseMinForRewards = newBaseMinForRewards;
         emit SetBaseMinForRewards(cometProxy, oldBaseMinForRewards, newBaseMinForRewards);
     }
-    //ok: configurator-rule
+    //ok: state-changing-func-does-not-emit-event
     function setBaseBorrowMin(address cometProxy, uint104 newBaseBorrowMin) external {
         if (msg.sender != governor) revert Unauthorized();
 
@@ -243,7 +242,7 @@ contract Configurator is ConfiguratorStorage {
         configuratorParams[cometProxy].baseBorrowMin = newBaseBorrowMin;
         emit SetBaseBorrowMin(cometProxy, oldBaseBorrowMin, newBaseBorrowMin);
     }
-    //ok: configurator-rule
+    //ok: state-changing-func-does-not-emit-event
     function setTargetReserves(address cometProxy, uint104 newTargetReserves) external {
         if (msg.sender != governor) revert Unauthorized();
 
@@ -251,14 +250,14 @@ contract Configurator is ConfiguratorStorage {
         configuratorParams[cometProxy].targetReserves = newTargetReserves;
         emit SetTargetReserves(cometProxy, oldTargetReserves, newTargetReserves);
     }
-    //ok: configurator-rule
+    //ok: state-changing-func-does-not-emit-event
     function addAsset(address cometProxy, AssetConfig calldata assetConfig) external {
         if (msg.sender != governor) revert Unauthorized();
 
         configuratorParams[cometProxy].assetConfigs.push(assetConfig);
         emit AddAsset(cometProxy, assetConfig);
     }
-    //ok: configurator-rule
+    //ok: state-changing-func-does-not-emit-event
     function updateAsset(address cometProxy, AssetConfig calldata newAssetConfig) external {
         if (msg.sender != governor) revert Unauthorized();
 
@@ -267,7 +266,7 @@ contract Configurator is ConfiguratorStorage {
         configuratorParams[cometProxy].assetConfigs[assetIndex] = newAssetConfig;
         emit UpdateAsset(cometProxy, oldAssetConfig, newAssetConfig);
     }
-    //ok: configurator-rule
+    //ok: state-changing-func-does-not-emit-event
     function updateAssetPriceFeed(address cometProxy, address asset, address newPriceFeed) external {
         if (msg.sender != governor) revert Unauthorized();
 
@@ -276,7 +275,7 @@ contract Configurator is ConfiguratorStorage {
         configuratorParams[cometProxy].assetConfigs[assetIndex].priceFeed = newPriceFeed;
         emit UpdateAssetPriceFeed(cometProxy, asset, oldPriceFeed, newPriceFeed);
     }
-    //ok: configurator-rule
+    //ok: state-changing-func-does-not-emit-event
     function updateAssetBorrowCollateralFactor(address cometProxy, address asset, uint64 newBorrowCF) external {
         if (msg.sender != governor) revert Unauthorized();
 
@@ -285,7 +284,7 @@ contract Configurator is ConfiguratorStorage {
         configuratorParams[cometProxy].assetConfigs[assetIndex].borrowCollateralFactor = newBorrowCF;
         emit UpdateAssetBorrowCollateralFactor(cometProxy, asset, oldBorrowCF, newBorrowCF);
     }
-    //ok: configurator-rule
+    //ok: state-changing-func-does-not-emit-event
     function updateAssetLiquidateCollateralFactor(address cometProxy, address asset, uint64 newLiquidateCF) external {
         if (msg.sender != governor) revert Unauthorized();
 
@@ -294,7 +293,7 @@ contract Configurator is ConfiguratorStorage {
         configuratorParams[cometProxy].assetConfigs[assetIndex].liquidateCollateralFactor = newLiquidateCF;
         emit UpdateAssetLiquidateCollateralFactor(cometProxy, asset, oldLiquidateCF, newLiquidateCF);
     }
-    //ok: configurator-rule
+    //ok: state-changing-func-does-not-emit-event
     function updateAssetLiquidationFactor(address cometProxy, address asset, uint64 newLiquidationFactor) external {
         if (msg.sender != governor) revert Unauthorized();
 
@@ -303,7 +302,7 @@ contract Configurator is ConfiguratorStorage {
         configuratorParams[cometProxy].assetConfigs[assetIndex].liquidationFactor = newLiquidationFactor;
         emit UpdateAssetLiquidationFactor(cometProxy, asset, oldLiquidationFactor, newLiquidationFactor);
     }
-    //ok: configurator-rule
+    //ok: state-changing-func-does-not-emit-event
     function updateAssetSupplyCap(address cometProxy, address asset, uint128 newSupplyCap) external {
         if (msg.sender != governor) revert Unauthorized();
 

@@ -28,7 +28,8 @@ $ semgrep --validate --config solidity
 
 ## Rules
 
-Rule ID | Targets | Description
---- | --- | ---
-
+Rule ID | Category | Severity | Description
+--- | --- | --- | ---
+privileged-func-lacks-access-control | security | ERROR | A privileged administrator function lacks access control.
+state-changing-func-does-not-emit-event | correctness | WARNING | A state changing function does not emit an event.
 
