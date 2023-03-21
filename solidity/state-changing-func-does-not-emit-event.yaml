@@ -1,0 +1,58 @@
+rules:
+  - id: state-changing-func-does-not-emit-event
+    message: A state changing function does not emit an event.
+    languages:
+      - solidity
+    severity: WARNING
+    metadata:
+      category: correctness
+      tags:
+        - compound
+    patterns:
+      - metavariable-regex:
+          metavariable: $FUNC
+          regex: ^(set|update|add)\w*$
+      # semgrep can't parse properly ellipsis operator in "emit $EVENT(...);"
+      - pattern-not: |
+          function $FUNC(...) {
+            ...
+            emit $EVENT($ARG1);
+            ...
+          }
+      - pattern-not: |
+          function $FUNC(...) {
+            ...
+            emit $EVENT($ARG1, $ARG2);
+            ...
+          }
+      - pattern-not: |
+          function $FUNC(...) {
+            ...
+            emit $EVENT($ARG1, $ARG2, $ARG3);
+            ...
+          }
+      - pattern-not: |
+          function $FUNC(...) {
+            ...
+            emit $EVENT($ARG1, $ARG2, $ARG3, $ARG4);
+            ...
+          }
+      - pattern-not: |
+          function $FUNC(...) {
+            ...
+            emit $EVENT($ARG1, $ARG2, $ARG3, $ARG4, $ARG5);
+            ...
+          }
+      - pattern-not: |
+          function $FUNC(...) {
+            $WRAPPED(...);
+          }
+      - pattern-either:
+        - pattern: |
+            function $FUNC(...) public {
+                ...
+            }
+        - pattern: |
+            function $FUNC(...) external {
+                ...
+            }

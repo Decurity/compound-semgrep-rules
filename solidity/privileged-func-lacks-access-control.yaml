@@ -1,0 +1,39 @@
+rules:
+  - id: privileged-func-lacks-access-control
+    message: A privileged administrator function lacks access control.
+    languages:
+      - solidity
+    severity: ERROR
+    metadata:
+      category: security
+      tags:
+        - compound
+    patterns:
+      - metavariable-regex:
+          metavariable: $FUNC
+          regex: ^(set|update|add)\w*$
+      - pattern-not: |
+          function $FUNC(...) {
+            ...
+            require(<... msg.sender ...>, ...);
+            ...
+          }
+      - pattern-not: |
+          function $FUNC(...) {
+            ...
+            if(<... msg.sender ...>) { ... }
+            ...
+          }
+      - pattern-not: |
+          function $FUNC(...) {
+            $WRAPPED(...);
+          }
+      - pattern-either:
+        - pattern: |
+            function $FUNC(...) external {
+              ...
+            }
+        - pattern: |
+            function $FUNC(...) public {
+              ...
+            }
