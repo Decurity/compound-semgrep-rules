@@ -1,0 +1,26 @@
+rules:
+  - id: transfer-return-value-not-checked
+    message: Return value of an ERC20 transfer is not checked.
+    languages:
+      - solidity
+    severity: WARNING
+    metadata:
+      category: security
+      tags:
+        - compound
+    patterns:
+      - metavariable-regex:
+          metavariable: $TRANSFER
+          regex: ^(transfer|transferFrom)$
+      - pattern-inside: |
+          function $FUNC(...) {
+            ...
+          }
+      - pattern: |
+          $SUCC = ERC20($TOKEN).$TRANSFER(...);
+      - pattern-not-inside: |
+          ...
+          if (!$SUCC) {
+            revert(...);
+          }
+      
