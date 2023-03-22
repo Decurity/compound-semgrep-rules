@@ -1,0 +1,26 @@
+rules:
+  - id: lack-of-revert-alreadyinitialized
+    message: Function initialize() doesn't have AlreadyInitialized revert
+    metadata:
+      category: security
+      tags:
+        - compound
+    languages:
+      - solidity
+    severity: ERROR
+    patterns:
+      - pattern-either:
+          - pattern: function initialize(...) public {...}
+          - pattern: function initialize(...) external {...}
+      - pattern-not: |
+          function initialize(...) public {
+            ...
+            revert AlreadyInitialized(...);
+            ...
+            }
+      - pattern-not: |
+          function initialize(...) external {
+            ...
+            revert AlreadyInitialized(...);
+            ...
+            }
