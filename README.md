@@ -33,4 +33,5 @@ Rule ID | Category | Severity | Description
 privileged-func-lacks-access-control | security | ERROR | A privileged administrator function lacks access control.
 state-changing-func-does-not-emit-event | correctness | WARNING | A state changing function does not emit an event.
 transfer-return-value-not-checked | security | WARNING | Return value of an ERC20 transfer is not checked.
+lack-of-revert-alreadyinitialized | security | ERROR | Function initialize() doesn't have AlreadyInitialized revert
 
