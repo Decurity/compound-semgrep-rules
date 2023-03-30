@@ -15,8 +15,8 @@ rules:
           metavariable: $FUNC
           regex: "^_"
       - pattern: |
-          function $FUNC() { ... }
+          function $FUNC(...) { ... }
       - pattern-not: |
-          function $FUNC() internal { ... }
+          function $FUNC(...) internal { ... }
       - pattern-not: |
-          function $FUNC() private { ... }
+          function $FUNC(...) private { ... }

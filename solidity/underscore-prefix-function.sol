@@ -5,12 +5,12 @@ contract Test {
 	}
 
 	// ruleid: underscore-prefix-function
-	function _not_Internal() public {
+	function _not_Internal(bytes opa) public {
 		uint256 a = 1;
 	}
 
 	// ok: underscore-prefix-function
-	function _smth() private {
+	function _smth(string lulz) private {
 		uint256 a = 1;
 	}
 
