@@ -1,0 +1,25 @@
+rules:
+  - id: uint-naming-lowercase
+    message: An agreed upon naming for unsigned integer variables/functions/errors/etc is *UInt* with uppercase I.
+    languages:
+      - solidity
+    severity: WARNING
+    metadata:
+      category: coding-style
+      tags:
+        - compound
+      references:
+        - "https://github.com/compound-finance/comet/pull/433#discussion_r905230703"
+    patterns:
+      - metavariable-regex:
+          metavariable: $NAME
+          regex: ".*Uint.*"
+      - pattern-either:
+        - pattern: |
+            $TYPE $NAME = ...;
+        - pattern: |
+            $TYPE $NAME;
+        #- pattern: |
+        #    error $NAME(...);
+        - pattern: |
+            event $NAME(...);
