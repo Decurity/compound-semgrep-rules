@@ -4,12 +4,12 @@ rules:
     languages:
       - solidity
     severity: WARNING
-    references:
-      - https://github.com/compound-finance/comet/issues/396
     metadata:
       category: coding-style
       tags:
         - compound
+      references:
+        - https://github.com/compound-finance/comet/issues/396
     patterns:
       - metavariable-regex:
           metavariable: $NAME
