@@ -27,3 +27,5 @@ rules:
             function $NAME(...) {
               ...
             }
+        - pattern: |
+            struct $NAME {...}

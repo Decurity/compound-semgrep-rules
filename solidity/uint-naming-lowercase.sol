@@ -6,4 +6,9 @@ contract Test {
 
     // ruleid: uint-naming-lowercase
 	function toUint8() {}
+
+    // ruleid: uint-naming-lowercase
+    struct Uint8 {
+        uint256 a;
+    }
 }
