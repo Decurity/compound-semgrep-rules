@@ -1,0 +1,28 @@
+rules:
+  - id: lack-of-indexed-parameter
+    message: Event parameters with type 'address' should be indexed
+    languages:
+      - solidity
+    severity: WARNING
+    metadata:
+      references:
+        - https://blog.openzeppelin.com/compound-polygon-bridge-receiver-audit/
+      tags:
+        - compound
+        - events
+    patterns:
+      - pattern-either:
+          - pattern: event $EVENT(address $ADDR, ...);
+          - pattern: event $EVENT(..., address $ADDR);
+          - pattern: event $EVENT(..., address $ADDR, ...);
+          
+      - pattern-not: event $EVENT(address indexed $ADDR, ...);
+      - pattern-not: event $EVENT(..., address indexed $ADDR);
+      - pattern-not: event $EVENT(..., address indexed $ADDR, ...);
+
+      # semgrep doesn't see the difference between function and event in abstract classes and interfaces
+      
+      - pattern-not: function $FUNC(...) external;
+      - pattern-not: function $FUNC(...) public;
+      - pattern-not: function $FUNC(...) internal;
+      - pattern-not: function $FUNC(...) private;
