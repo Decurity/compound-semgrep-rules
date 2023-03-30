@@ -3,9 +3,11 @@ rules:
     message: A constant name is not in UPPER_CASE like other constant variables.
     languages:
       - solidity
-    severity: ERROR
+    severity: WARNING
+    references:
+      - https://github.com/compound-finance/comet/issues/396
     metadata:
-      category: security
+      category: coding-style
       tags:
         - compound
     patterns:
