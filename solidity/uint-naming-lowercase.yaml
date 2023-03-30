@@ -23,3 +23,7 @@ rules:
         #    error $NAME(...);
         - pattern: |
             event $NAME(...);
+        - pattern: |
+            function $NAME(...) {
+              ...
+            }
