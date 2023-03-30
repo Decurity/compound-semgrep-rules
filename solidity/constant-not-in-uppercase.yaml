@@ -1,0 +1,16 @@
+rules:
+  - id: constant-not-in-uppercase
+    message: A constant name is not in UPPER_CASE like other constant variables.
+    languages:
+      - solidity
+    severity: ERROR
+    metadata:
+      category: security
+      tags:
+        - compound
+    patterns:
+      - metavariable-regex:
+          metavariable: $NAME
+          regex: "[a-z]"
+      - pattern: |
+          $TYPE constant $NAME = ...;
