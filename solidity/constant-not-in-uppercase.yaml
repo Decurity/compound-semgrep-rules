@@ -11,6 +11,6 @@ rules:
     patterns:
       - metavariable-regex:
           metavariable: $NAME
-          regex: "[a-z]"
+          regex: ".*[a-z].*"
       - pattern: |
           $TYPE constant $NAME = ...;
