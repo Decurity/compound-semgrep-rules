@@ -1,0 +1,22 @@
+rules:
+  - id: underscore-prefix-function
+    message: The convention of functions named with the "_" prefix is not clear. Sometimes it is used for internal functions and other times it's not
+    languages:
+      - solidity
+    severity: WARNING
+    metadata:
+      category: coding-style
+      tags:
+        - compound
+      references:
+        - https://github.com/compound-finance/comet/issues/396
+    patterns:
+      - metavariable-regex:
+          metavariable: $FUNC
+          regex: "^_"
+      - pattern: |
+          function $FUNC(...) { ... }
+      - pattern-not: |
+          function $FUNC(...) internal { ... }
+      - pattern-not: |
+          function $FUNC(...) private { ... }
