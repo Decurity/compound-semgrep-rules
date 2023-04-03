@@ -1,0 +1,60 @@
+rules:
+  - id: missing-constructor-sanity-checks
+    message: There're no sanity checks for the constructor argument $ARG.
+    languages:
+      - solidity
+    severity: WARNING
+    metadata:
+      category: security
+      tags:
+        - compound
+    patterns:
+      - pattern-either:
+        - pattern: |
+            constructor($TYPE $ARG) {
+              ...
+            }
+        - pattern: |
+            constructor(..., $TYPE $ARG, ...) {
+              ...
+            }
+        - pattern: |
+            constructor(..., $TYPE $ARG) {
+              ...
+            }
+        - pattern: |
+            constructor($TYPE $ARG, ...) {
+              ...
+            }
+      - pattern-not: |
+          constructor(..., $TYPE $ARG, ...) {
+            ...
+            if(<... $ARG ...>) {
+              ...
+            }
+            ...
+          }
+      - pattern-not: |
+          constructor(...) {
+            ...
+            require(<... $ARG ...>, ...);
+            ...
+          }
+      - pattern-not: |
+          constructor(..., $TYPE $ARG, ...) {
+            ...
+            $VAR = <... $ARG ...>;
+            ...
+            if(<... $VAR ...>) {
+              ...
+            }
+            ...
+          }
+      - pattern-not: |
+          constructor(..., $TYPE $ARG, ...) {
+            ...
+            $VAR = <... $ARG ...>;
+            ...
+            require(<... $VAR ...>, ...);
+            ...
+          }
