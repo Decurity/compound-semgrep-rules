@@ -3,9 +3,9 @@ rules:
     message: An agreed upon naming for unsigned integer variables/functions/errors/etc is *UInt* with uppercase I.
     languages:
       - solidity
-    severity: WARNING
+    severity: INFO
     metadata:
-      category: coding-style
+      category: best-practice
       tags:
         - compound
       references:

@@ -3,9 +3,9 @@ rules:
     message: A constant name is not in UPPER_CASE like other constant variables.
     languages:
       - solidity
-    severity: WARNING
+    severity: INFO
     metadata:
-      category: coding-style
+      category: best-practice
       tags:
         - compound
       references:

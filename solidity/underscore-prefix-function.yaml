@@ -3,9 +3,9 @@ rules:
     message: The convention of functions named with the "_" prefix is not clear. Sometimes it is used for internal functions and other times it's not
     languages:
       - solidity
-    severity: WARNING
+    severity: INFO
     metadata:
-      category: coding-style
+      category: best-practice
       tags:
         - compound
       references:
