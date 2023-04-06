@@ -30,11 +30,11 @@ $ semgrep --validate --config solidity
 
 Rule ID | Category | Severity | Description
 --- | --- | --- | ---
+constant-not-in-uppercase | best-practice | WARNING |  A constant name is not in UPPER_CASE like other constant variables.
+lack-of-revert-alreadyinitialized | security | ERROR | Function initialize() doesn't have AlreadyInitialized revert.
+missing-constructor-sanity-checks | security | WARNING | There're no sanity checks for some constructor arguments.
 privileged-func-lacks-access-control | security | ERROR | A privileged administrator function lacks access control.
 state-changing-func-does-not-emit-event | correctness | WARNING | A state changing function does not emit an event.
 transfer-return-value-not-checked | security | WARNING | Return value of an ERC20 transfer is not checked.
-lack-of-revert-alreadyinitialized | security | ERROR | Function initialize() doesn't have AlreadyInitialized revert
-underscore-prefix-function | coding-style | WARNING | The convention of functions named with the "_" prefix is not clear.
-uint-naming-lowercase | coding-style | WARNING | An agreed upon naming for unsigned integer variables/functions/errors/etc is *UInt* with uppercase I.
-constant-not-in-uppercase | coding-style | WARNING |  A constant name is not in UPPER_CASE like other constant variables.
-
+underscore-prefix-function | best-practice | WARNING | The convention of functions named with the "_" prefix is not clear.
+uint-naming-lowercase | best-practice | WARNING | An agreed upon naming for unsigned integer variables/functions/errors/etc is *UInt* with uppercase I.
